@@ -1,16 +1,10 @@
 import Navbar from './Navbar';
 import Footer from './Footer';
 import styled from 'styled-components';
-import { Montserrat } from '@next/font/google';
-
-const montserrat = Montserrat({
-  subsets: ['latin'],
-  weights: [400, 500, 600, 700],
-});
 
 const Layout = ({ children }) => {
   return (
-    <Wrapper className={montserrat.className}>
+    <Wrapper>
       <div className="app__layout-wrapper">
         <div className="app__layout-sidebar">
           <Navbar />
