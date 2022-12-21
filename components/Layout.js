@@ -1,6 +1,7 @@
 import Navbar from './Navbar';
 import Footer from './Footer';
 import styled from 'styled-components';
+import { primaryFont } from '../utils/style-variables';
 
 const Layout = ({ children }) => {
   return (
@@ -21,6 +22,8 @@ const Layout = ({ children }) => {
 export default Layout;
 
 const Wrapper = styled.div`
+  font-family: ${primaryFont};
+
   .app__layout-wrapper {
     display: grid;
     grid-template-columns: 200px 1fr;

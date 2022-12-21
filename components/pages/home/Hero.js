@@ -32,7 +32,7 @@ const HeroSection = styled.section`
   grid-template-columns: 1fr 1fr;
   grid-auto-rows: 1fr;
   height: 100vh;
-  font-family: ${primaryFont};
+  /* font-family: ${primaryFont}; */
 
   @media (max-width: 950px) {
     grid-template-columns: 1fr;
