@@ -4,6 +4,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { bodyTextColor } from '../../../utils/style-variables';
 import BodyText from '../../building-blocks/BodyText';
+import Link from 'next/link';
 
 const Hero = () => {
   return (
@@ -17,8 +18,12 @@ const Hero = () => {
           className="hero__subtitle"
         />
         <ButtonContainer>
-          <PrimaryButton buttonText="Apply Today" />
-          <SecondaryButton buttonText="Get Involved" />
+          <Link href="/application">
+            <PrimaryButton buttonText="Apply Today" />
+          </Link>
+          <Link href="/initiatives">
+            <SecondaryButton buttonText="Get Involved" />
+          </Link>
         </ButtonContainer>
       </HeroContent>
     </HeroSection>

@@ -4,6 +4,7 @@ import BodyText from '../../building-blocks/BodyText';
 import Step from './Step';
 import { steps } from '../../../content/applicationProcess';
 import PrimaryButton from '../../building-blocks/PrimaryButton';
+import Link from 'next/link';
 
 const ApplicationProcess = () => {
   return (
@@ -28,9 +29,9 @@ const ApplicationProcess = () => {
                 />
               ))}
             </Steps>
-            <div>
+            <Link href="/application">
               <PrimaryButton buttonText="Apply Today" />
-            </div>
+            </Link>
           </TextContent>
         </HalfScreenSplit>
       </Content>

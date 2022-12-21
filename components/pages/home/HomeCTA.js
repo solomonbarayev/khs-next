@@ -3,6 +3,7 @@ import HeaderTwo from '../../building-blocks/HeaderTwo';
 import BodyText from '../../building-blocks/BodyText';
 import SecondaryButton from '../../building-blocks/SecondaryButton';
 import { secondaryColor, whiteColor } from '../../../utils/style-variables';
+import Link from 'next/link';
 
 const HomeCTA = () => {
   return (
@@ -16,7 +17,9 @@ const HomeCTA = () => {
           text="Discover how you can help us enable young Jewish families achieve higher degrees."
           className="cta__text"
         />
-        <SecondaryButton buttonText="Get Involved" className="cta__button" />
+        <Link href="/initiatives">
+          <SecondaryButton buttonText="Get Involved" className="cta__button" />
+        </Link>
       </Content>
     </Wrapper>
   );
