@@ -2,7 +2,7 @@ import PrimaryButton from '../../building-blocks/PrimaryButton';
 import SecondaryButton from '../../building-blocks/SecondaryButton';
 import React from 'react';
 import styled from 'styled-components';
-import { primaryFont, bodyText } from '../../../utils/style-variables';
+import { bodyTextColor } from '../../../utils/style-variables';
 import BodyText from '../../building-blocks/BodyText';
 
 const Hero = () => {
@@ -32,7 +32,6 @@ const HeroSection = styled.section`
   grid-template-columns: 1fr 1fr;
   grid-auto-rows: 1fr;
   height: 100vh;
-  /* font-family: ${primaryFont}; */
 
   @media (max-width: 950px) {
     grid-template-columns: 1fr;
@@ -57,7 +56,6 @@ const HeroContent = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  color: ${bodyText};
 
   @media (max-width: 950px) {
     padding: 6rem;
@@ -77,6 +75,7 @@ const HeroContent = styled.div`
     margin-bottom: 1rem;
     line-height: 1.3;
     max-width: 30rem;
+    color: #0f2e47;
     margin-bottom: 0.5em;
 
     @media (max-width: 650px) {
@@ -93,6 +92,7 @@ const HeroContent = styled.div`
     font-size: 1.3em;
     max-width: 25em;
     line-height: 1.6;
+    color: ${bodyTextColor};
   }
 `;
 
