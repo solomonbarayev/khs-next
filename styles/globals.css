@@ -1,4 +1,9 @@
 @import url('../vendor/normalize.css');
+@import url('../vendor/fonts/fonts.css');
+
+html {
+  font-family: 'Montserrat', sans-serif;
+}
 
 .section {
   max-width: 1400px;
