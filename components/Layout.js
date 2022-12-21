@@ -1,11 +1,16 @@
 import Navbar from './Navbar';
 import Footer from './Footer';
 import styled from 'styled-components';
-import { primaryFont } from '../utils/style-variables';
+import { Montserrat } from '@next/font/google';
+
+const montserrat = Montserrat({
+  subsets: ['latin'],
+  weights: [400, 500, 600, 700],
+});
 
 const Layout = ({ children }) => {
   return (
-    <Wrapper>
+    <Wrapper className={montserrat.className}>
       <div className="app__layout-wrapper">
         <div className="app__layout-sidebar">
           <Navbar />
@@ -22,8 +27,6 @@ const Layout = ({ children }) => {
 export default Layout;
 
 const Wrapper = styled.div`
-  font-family: ${primaryFont};
-
   .app__layout-wrapper {
     display: grid;
     grid-template-columns: 200px 1fr;
