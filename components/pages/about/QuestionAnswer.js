@@ -3,7 +3,7 @@ import { secondaryColor, bodyTextColor } from '../../../utils/style-variables';
 
 const QuestionAnswer = ({ question, answer, className }) => {
   return (
-    <Wrapper className={!className ? `section` : `section ${className}`}>
+    <Wrapper className={className ? className : ''}>
       <QuestionContent>
         <QuestionWrapper>
           <h3 className="question__header">{question}</h3>
