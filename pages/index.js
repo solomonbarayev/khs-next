@@ -10,11 +10,18 @@ import WhoWeHelp from '../components/pages/home/WhoWeHelp';
 export default function Home() {
   return (
     <Wrapper>
-      <Head
-        title="Kochvei Hashamayim"
-        description="Home page for the website"
-        keywords="Home, page, website"
-      />
+      <Head>
+        <title>Kochvei HaShamayim | Home</title>
+        <meta
+          name="description"
+          content="Kochvei HaShamayim champions the values of family, community, and education by supporting young Jewish couples, allowing them to minimize difficult compromises and to excel in both their family life and their early career or continued education."
+        />
+        <meta
+          name="keywords"
+          content="Kochvei, HaShamayim, jewish, academics, higher education, KHS"
+        />
+        <meta name="author" content="Kochvei HaShamayim" />
+      </Head>
       <Hero />
       <Problem />
       <Solution />

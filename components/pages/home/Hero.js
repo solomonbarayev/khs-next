@@ -80,7 +80,7 @@ const HeroContent = styled.div`
     margin-bottom: 1rem;
     line-height: 1.3;
     max-width: 30rem;
-    color: #0f2e47;
+    color: ${bodyTextColor};
     margin-bottom: 0.5em;
 
     @media (max-width: 650px) {
