@@ -1,9 +1,9 @@
 import Head from 'next/head';
 import React from 'react';
 import styled from 'styled-components';
-import { bodyTextColor } from '../../utils/style-variables';
+import { bodyTextColor, whiteColor } from '../../utils/style-variables';
 
-const SidepageHero = ({ title, bgImg, className }) => {
+const SidepageHero = ({ title, bgImg, className, darkBg }) => {
   return (
     <>
       <Head>
@@ -14,7 +14,7 @@ const SidepageHero = ({ title, bgImg, className }) => {
         />
       </Head>
       <Wrapper bgImg={bgImg} className={className}>
-        <h1>{title}</h1>
+        <Title darkBg={darkBg}>{title}</Title>
       </Wrapper>
     </>
   );
@@ -28,12 +28,12 @@ const Wrapper = styled.header`
   background-image: ${({ bgImg }) => (bgImg ? `url(${bgImg})` : 'none')};
   background-size: cover;
   background-repeat: no-repeat;
+`;
 
-  h1 {
-    font-size: 3rem;
-    font-weight: 700;
-    margin-block-end: 0;
-    margin-block-start: 0;
-    color: ${bodyTextColor};
-  }
+const Title = styled.h1`
+  font-size: 3rem;
+  font-weight: 700;
+  margin-block-end: 0;
+  margin-block-start: 0;
+  color: ${({ darkBg }) => (darkBg ? whiteColor : bodyTextColor)};
 `;

@@ -5,7 +5,6 @@ import { questions } from '../content/about-questions';
 import HeaderTwo from '../components/building-blocks/HeaderTwo';
 import BodyText from '../components/building-blocks/BodyText';
 import ourNameImage from '../public/our-names-img.jpg';
-import aboutCTAImage from '../public/mission-statement-img.jpeg';
 import Image from 'next/image';
 import {
   primaryColor,
