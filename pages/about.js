@@ -5,10 +5,17 @@ import { questions } from '../content/about-questions';
 import HeaderTwo from '../components/building-blocks/HeaderTwo';
 import BodyText from '../components/building-blocks/BodyText';
 import ourNameImage from '../public/our-names-img.jpg';
+import aboutCTAImage from '../public/mission-statement-img.jpeg';
 import Image from 'next/image';
-import { secondaryColor, whiteColor } from '../utils/style-variables';
+import {
+  primaryColor,
+  secondaryColor,
+  whiteColor,
+} from '../utils/style-variables';
 import { ourTeam } from '../content/our-team';
 import TeamMember from '../components/pages/about/TeamMember';
+import PrimaryButton from '../components/building-blocks/PrimaryButton';
+import Link from 'next/link';
 
 const About = () => {
   return (
@@ -62,6 +69,36 @@ const About = () => {
             ))}
           </ul>
         </OurTeam>
+
+        <AboutCTA>
+          <AboutCTAContentWrapper>
+            <AboutCTAContent className="half-section">
+              <HeaderTwo
+                text="With your help we can make a difference"
+                className="about-cta__title"
+              />
+              <BodyText
+                text="Help us strengthen the future of the Jewish up and coming."
+                className="about-cta__text"
+              />
+              <Link href="/initiatives">
+                <PrimaryButton
+                  buttonText="Get Involved"
+                  className="about-cta__button"
+                />
+              </Link>
+            </AboutCTAContent>
+          </AboutCTAContentWrapper>
+          <AboutCTAImage>
+            {/* <img
+              // src={aboutCTAImage}
+              src="/mission-statement-img.jpeg"
+              alt="Our Mission"
+              className="about-cta__image"
+            /> */}
+            <CTAImage src="/mission-statement-img.jpeg" />
+          </AboutCTAImage>
+        </AboutCTA>
       </Wrapper>
     </>
   );
@@ -151,5 +188,66 @@ const OurTeam = styled.section`
     display: flex;
     flex-direction: column;
     gap: 2rem;
+  }
+`;
+
+const AboutCTA = styled.section`
+  display: flex;
+  align-items: center;
+  background-color: ${primaryColor};
+  position: relative;
+
+  @media (max-width: 921px) {
+    flex-direction: column;
+  }
+`;
+
+const AboutCTAContentWrapper = styled.div`
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  padding: 3rem 2rem;
+
+  @media (max-width: 921px) {
+    width: 100%;
+  }
+`;
+
+const AboutCTAContent = styled.div`
+  /* width: 50%; */
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  .about-cta__title {
+    color: ${whiteColor};
+  }
+
+  .about-cta__text {
+    color: ${whiteColor};
+  }
+
+  .about-cta__button {
+    background-color: ${secondaryColor};
+  }
+`;
+
+const AboutCTAImage = styled.div`
+  width: 50%;
+
+  @media (max-width: 921px) {
+    width: 100%;
+    height: 100%;
+  }
+`;
+
+const CTAImage = styled.img`
+  width: 100%;
+  object-fit: cover;
+
+  @media (max-width: 921px) {
+    max-height: 300px;
+    object-position: 0% 0%;
   }
 `;
