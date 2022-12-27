@@ -7,6 +7,8 @@ import BodyText from '../components/building-blocks/BodyText';
 import ourNameImage from '../public/our-names-img.jpg';
 import Image from 'next/image';
 import { secondaryColor, whiteColor } from '../utils/style-variables';
+import { ourTeam } from '../content/our-team';
+import TeamMember from '../components/pages/about/TeamMember';
 
 const About = () => {
   return (
@@ -50,6 +52,16 @@ const About = () => {
             </OurNameImage>
           </OurNameContent>
         </OurName>
+
+        <OurTeam>
+          <HeaderTwo text="Meet Our Team" />
+
+          <ul className="our-team__list">
+            {ourTeam.map((member) => (
+              <TeamMember key={member.id} member={member} />
+            ))}
+          </ul>
+        </OurTeam>
       </Wrapper>
     </>
   );
@@ -124,5 +136,20 @@ const OurNameImage = styled.div`
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+`;
+
+const OurTeam = styled.section`
+  padding: 6rem 2rem;
+  background-color: #fcfcfc;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+
+  .our-team__list {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
   }
 `;
