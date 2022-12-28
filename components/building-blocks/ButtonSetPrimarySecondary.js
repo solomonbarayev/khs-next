@@ -29,4 +29,5 @@ export default ButtonSetPrimarySecondary;
 const ButtonSet = styled.div`
   display: flex;
   gap: 1rem;
+  flex-wrap: wrap;
 `;
