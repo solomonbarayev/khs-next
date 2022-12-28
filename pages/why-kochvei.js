@@ -41,7 +41,7 @@ const WhyKochvei = () => {
             className="vertical-timeline-element--work"
             contentStyle={{
               boxShadow: '0px 20px 40px rgb(0 0 0 / 10%)',
-              padding: '2rem',
+              padding: '1.3rem',
             }}
             icon={
               <IconWrapper>
@@ -80,7 +80,7 @@ const WhyKochvei = () => {
             className="vertical-timeline-element--work"
             contentStyle={{
               boxShadow: '0px 20px 40px rgb(0 0 0 / 10%)',
-              padding: '2rem',
+              padding: '1.3rem',
             }}
             icon={
               <IconWrapper>
@@ -105,7 +105,7 @@ const WhyKochvei = () => {
             className="vertical-timeline-element--work"
             contentStyle={{
               boxShadow: '0px 20px 40px rgb(0 0 0 / 10%)',
-              padding: '2rem',
+              padding: '1.3rem',
             }}
             icon={
               <IconWrapper>
@@ -127,7 +127,7 @@ const WhyKochvei = () => {
             className="vertical-timeline-element--work"
             contentStyle={{
               boxShadow: '0px 20px 40px rgb(0 0 0 / 10%)',
-              padding: '2rem',
+              padding: '1.3rem',
             }}
             icon={
               <IconWrapper>
@@ -149,7 +149,7 @@ const WhyKochvei = () => {
             className="vertical-timeline-element--work"
             contentStyle={{
               boxShadow: '0px 20px 40px rgb(0 0 0 / 10%)',
-              padding: '2rem',
+              padding: '1.3rem',
             }}
             icon={
               <IconWrapper>
@@ -186,10 +186,21 @@ export default WhyKochvei;
 const Timeline = styled.div`
   padding: 0 2rem 6rem;
 
+  @media screen and (max-width: 600px) {
+    padding: 0 0.5rem 6rem;
+  }
+
   .why-khs-card__header {
-    margin-bottom: 20px;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
     font-size: 1.5rem;
     color: ${primaryColor};
+
+    @media screen and (max-width: 600px) {
+      margin-top: 0.3rem;
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+    }
   }
 
   .why-khs-card__model {

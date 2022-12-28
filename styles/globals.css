@@ -20,3 +20,7 @@ html {
     max-width: 700px;
   }
 }
+
+.vertical-timeline::before {
+  width: 2px !important;
+}
