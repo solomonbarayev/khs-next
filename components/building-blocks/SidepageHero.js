@@ -48,4 +48,8 @@ const Title = styled.h1`
   margin-block-end: 0;
   margin-block-start: 0;
   color: ${({ darkBg }) => (darkBg ? whiteColor : bodyTextColor)};
+
+  @media screen and (max-width: 600px) {
+    font-size: 2rem;
+  }
 `;
