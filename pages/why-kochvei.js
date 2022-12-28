@@ -15,11 +15,7 @@ import familyIcon from '../public/why-khs-icons/family.svg';
 import cooperativityIcon from '../public/why-khs-icons/cooperativity.svg';
 import networkingIcon from '../public/why-khs-icons/management.svg';
 import Image from 'next/image';
-import {
-  primaryColor,
-  secondaryColorRGBA,
-  secondaryColor,
-} from '../utils/style-variables';
+import { primaryColor, secondaryColor } from '../utils/style-variables';
 import PrimaryButton from '../components/building-blocks/PrimaryButton';
 import Link from 'next/link';
 
@@ -54,8 +50,21 @@ const WhyKochvei = () => {
             }>
             <HeaderTwo text="INVESTMENT" className="why-khs-card__header" />
             <BodyText
-              text="In this article, we outline a simple mathematical model that shows how a community that shares in the cost of an individual's education, will also share in its value later on. As shown in the figure below, the average success index (a measure defined in the article that accounts for an individual's personal value and the value of his or her network) of each member of the community increases fastest in a community that shares in the education costs of its newest members."
-              className="why-khs-card__body"
+              text={
+                <p>
+                  <Link href="/articles/khs-model" className="why-khs__link">
+                    In this article
+                  </Link>
+                  , we outline a simple mathematical model that shows how a
+                  community that shares in the cost of an individual&apos;s
+                  education, will also share in its value later on. As shown in
+                  the figure below, the average success index (a measure defined
+                  in the article that accounts for an individual&apos;s personal
+                  value and the value of his or her network) of each member of
+                  the community increases fastest in a community that shares in
+                  the education costs of its newest members.
+                </p>
+              }
             />
             <Image
               src={modelImage}
@@ -190,6 +199,10 @@ const Timeline = styled.div`
     padding: 0 0.5rem 6rem;
   }
 
+  .why-khs__link {
+    color: ${primaryColor};
+    cursor: pointer;
+  }
   .why-khs-card__header {
     margin-top: 1rem;
     margin-bottom: 1rem;
