@@ -48,6 +48,7 @@ const Nav = styled.nav`
   box-sizing: border-box;
   display: ${({ type }) => (type === 'mobile' ? 'none' : 'flex')};
   flex-direction: column;
+  gap: 1rem;
   justify-content: space-between;
   padding: 15px 20px 20px;
   background-color: ${({ type }) => (type === 'mobile' ? '#fff' : 'aliceblue')};

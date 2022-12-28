@@ -32,6 +32,7 @@ const Wrapper = styled.header`
   background-image: ${({ bgImg }) => (bgImg ? `url(${bgImg})` : 'none')};
   background-size: cover;
   background-repeat: no-repeat;
+  background-color: ${({ bgImg }) => bgImg === undefined && 'aliceblue'};
 `;
 
 const TitleContent = styled.div`
