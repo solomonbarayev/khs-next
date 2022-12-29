@@ -29,13 +29,13 @@ const KHSModel = () => {
 
         <BodyText
           text={
-            <>
-              <p>
+            <span>
+              <span>
                 We define one&rsquo;s&nbsp;<strong>value</strong>,&nbsp;
                 <em>vᵢ</em>, as not only an individual&rsquo;s net worth, but
                 also his or her expertise, time, skills, assets, and so on.
-              </p>
-              <p>
+              </span>
+              <span>
                 <strong>Note</strong>: When discussing value in the abstract, we
                 refer to this abstract definition that includes everything one
                 can offer in a transaction, but in our simulations, we treat
@@ -44,8 +44,8 @@ const KHSModel = () => {
                 interpretable. Nevertheless, the same results hold (in a
                 qualitative sense) for the more abstract notion of value, as
                 defined above.
-              </p>
-              <p>
+              </span>
+              <span>
                 An individual&rsquo;s value, however, is not all the value to
                 which one has access. For example, while Bill Gates&rsquo; net
                 worth is $130B, with friends like Warren Buffett, he has access
@@ -60,9 +60,9 @@ const KHSModel = () => {
                 fourth degree connections, since these are usually also
                 accessible (although with farther connections, one has access to
                 an even smaller fraction of their value).&nbsp;
-              </p>
-              <p>Mathematically, we can write this as follows:</p>
-            </>
+              </span>
+              <span>Mathematically, we can write this as follows:</span>
+            </span>
           }
         />
         <Image
@@ -74,7 +74,7 @@ const KHSModel = () => {
 
         <BodyText
           text={
-            <p>
+            <span>
               where, for a community of size&nbsp;<em>N,&nbsp;s</em>&nbsp;is the
               vector of the success indices of each of its members,&nbsp;
               <em>i.e.,&nbsp;</em>
@@ -91,7 +91,7 @@ const KHSModel = () => {
               simulations); and&nbsp;<em>diag</em>(&bull;)&nbsp;is an operator
               that, for any square matrix, returns the same matrix but all
               non-diagonal entries equal to zero.
-            </p>
+            </span>
           }
         />
         <br />
@@ -102,7 +102,7 @@ const KHSModel = () => {
         />
         <BodyText
           text={
-            <p>
+            <span>
               The initial network was set up with&nbsp;<em>N</em>
               ₀=100&nbsp;individuals, each of whom was given a value drawn from
               an exponential distribution with a scale parameter
@@ -121,42 +121,42 @@ const KHSModel = () => {
               of every individual added was initially sampled from an
               exponential distribution with a scale parameter
               of&nbsp;1&times;10⁴. We then distinguished three groups:
-            </p>
+            </span>
           }
         />
         <ol>
           <li>
             <BodyText
               text={
-                <p>
+                <span>
                   <strong>Null</strong>: Individuals whose value stays constant.
                   This serves either as a model for those not pursuing further
                   education, whose value is not, on average, expected to
                   increase as substantially; or as a standard relative to which
                   we compare the evolution of the other two groups.
-                </p>
+                </span>
               }
             />
           </li>
           <li>
             <BodyText
               text={
-                <p>
+                <span>
                   <strong>Without KHS</strong>: This is a group that incurs debt
                   for their education, with a resulting delay in the trajectory
                   of the growth of their value.
-                </p>
+                </span>
               }
             />
           </li>
           <li>
             <BodyText
               text={
-                <p>
+                <span>
                   <strong>With KHS</strong>: This is the group whose debt is
                   fully or partially paid off,&nbsp;<em>i.e.</em>, the
                   beneficiaries of KHS.
-                </p>
+                </span>
               }
             />
           </li>
@@ -211,14 +211,14 @@ const KHSModel = () => {
 
         <BodyText
           text={
-            <p>
+            <span>
               To obtain the code for the simulations, please feel free to reach
               out to Daniel at{' '}
               <a href="mailto:daniel@kochvei.org" className="model__link">
                 daniel@kochvei.org
               </a>
               .
-            </p>
+            </span>
           }
         />
       </Content>

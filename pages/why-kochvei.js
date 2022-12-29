@@ -51,7 +51,7 @@ const WhyKochvei = () => {
             <HeaderTwo text="INVESTMENT" className="why-khs-card__header" />
             <BodyText
               text={
-                <p>
+                <span>
                   <Link href="/articles/khs-model" className="why-khs__link">
                     In this article
                   </Link>
@@ -63,7 +63,7 @@ const WhyKochvei = () => {
                   value and the value of his or her network) of each member of
                   the community increases fastest in a community that shares in
                   the education costs of its newest members.
-                </p>
+                </span>
               }
             />
             <Image
@@ -75,11 +75,11 @@ const WhyKochvei = () => {
 
             <BodyText
               text={
-                <p>
+                <span>
                   <strong>Note:</strong> The model assumes, among other things,
                   that we add 10 fellows a year. For more details, check out
                   this article, where we present this model.
-                </p>
+                </span>
               }
               className="why-khs-card__body"
             />

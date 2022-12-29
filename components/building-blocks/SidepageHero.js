@@ -44,7 +44,7 @@ const TitleContent = styled.div`
 `;
 
 const Title = styled.h1`
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-weight: 700;
   margin-block-end: 0;
   margin-block-start: 0;

@@ -89,12 +89,6 @@ const About = () => {
             </AboutCTAContent>
           </AboutCTAContentWrapper>
           <AboutCTAImage>
-            {/* <img
-              // src={aboutCTAImage}
-              src="/mission-statement-img.jpeg"
-              alt="Our Mission"
-              className="about-cta__image"
-            /> */}
             <CTAImage src="/mission-statement-img.jpeg" />
           </AboutCTAImage>
         </AboutCTA>

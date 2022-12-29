@@ -16,7 +16,7 @@ export const ourTeam = [
     email: 'daniel@kochvei.org',
     description: (
       <>
-        <p>
+        <span>
           Daniel got his BA in mathematics and physics at Yeshiva University.
           During his time at YU, he was in Rabbi Eliyahu Ben-Haim&apos;s shiur.
           After graduating, he spent two years teaching physics, math, and
@@ -27,13 +27,13 @@ export const ourTeam = [
           computational biologist at the Broad Institute, and is currently a PhD
           student in mathematics at MIT. For more information, check out his{' '}
           <a href="https://daniellazarev.wordpress.com/">website</a>.
-        </p>
+        </span>
         <br />
-        <p>
+        <span>
           Daniel is excited about how Kochvei can help young couples balance
           their personal and career goals, without needing to compromise one for
           the other.
-        </p>
+        </span>
       </>
     ),
   },
@@ -46,7 +46,7 @@ export const ourTeam = [
     email: 'solomon@1bar.design',
     description: (
       <>
-        <p>
+        <span>
           Solomon comes from an extensive background of Tech and Consumer
           Psychology. He completed his BS in Business with a concentration in
           Business Intelligence and Marketing Analytics at Yeshiva University.
@@ -55,14 +55,14 @@ export const ourTeam = [
           eCommerce space as well as his active Web Design Agency,{' '}
           <a href="https://www.1bar.design">1Bar Design</a>. Solomon made Aliya
           in 2019 with his family, and currently lives in Be&apos;er Sheva.
-        </p>
+        </span>
         <br />
-        <p>
+        <span>
           Solomon has always felt strongly that with a little bit of human help,
           and some divine intervention, the sky&apos;s the limit for young
           Jewish couples. As part of the Kochvei team he looks forward to
           helping provide that initial boost for many young professionals.
-        </p>
+        </span>
       </>
     ),
   },
@@ -75,7 +75,7 @@ export const ourTeam = [
     email: 'eperez@kochvei.org',
     description: (
       <>
-        <p>
+        <span>
           Esther is a current student at Stern College for Women, pursuing a BA
           in Psychology. She has had experience volunteering and interning at
           some wonderful diverse nonprofit organizations. It is Esther&apos;s
@@ -83,13 +83,13 @@ export const ourTeam = [
           nonprofit leadership and community outreach and development. Esther
           also hopes to get her MS in Jewish Education and Administration in
           order to one day enter the world of teaching.
-        </p>
+        </span>
         <br />
-        <p>
+        <span>
           Esther has always loved resolving challenges within our larger
           communities and is greatly inspired and excited by Kochvei&apos;s
           drive to make a difference for generations to come.
-        </p>
+        </span>
       </>
     ),
   },
