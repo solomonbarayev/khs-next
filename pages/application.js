@@ -1,32 +1,33 @@
+import FileUpload from './../components/pages/application/FileUpload';
+import DegreeRadios from './../components/pages/application/DegreeRadios';
 import FormInput from './../components/building-blocks/FormInput';
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import {
-  primaryColor,
-  secondaryColor,
-  whiteColor,
-} from '../utils/style-variables';
+import { whiteColor } from '../utils/style-variables';
 import SidepageHero from '../components/building-blocks/SidepageHero';
-
-const uni = {
-  university: '',
-  universityLocation: '',
-};
-
-const createUniqueId = () => {
-  return Math.round(new Date().getTime() + Math.random());
-};
+import UniversityList from '../components/pages/application/UniversityList';
+import HeaderTwo from '../components/building-blocks/HeaderTwo';
+import PrimaryButton from '../components/building-blocks/PrimaryButton';
+import { createUniqueId } from '../utils/helpers';
+import { uni } from '../utils/constants';
+import useForm from '../hooks/useForm';
 
 const Application = () => {
-  const [formValues, setFormValues] = useState({});
+  const {
+    formValues,
+    setFormValues,
+    handleChange,
+    handleFileUpload,
+    handleSubmit,
+  } = useForm();
   const [uniSet, setUniSet] = useState({
     appliedTo: [{ ...uni, id: createUniqueId() }],
-    acceptedTo: [{ ...uni, id: createUniqueId() }],
+    acceptedTo: [{ ...uni, id: createUniqueId() + 1 }],
   });
 
-  const addUni = (set) => {
+  const addUni = (set, newId) => {
     const uniCopy = [...uniSet[set]];
-    uniCopy.push({ ...uni, id: createUniqueId() });
+    uniCopy.push({ ...uni, id: newId });
     setUniSet({ ...uniSet, [set]: uniCopy });
   };
 
@@ -34,7 +35,6 @@ const Application = () => {
     const uniCopy = [...uniSet[set]];
     uniCopy.splice(index, 1);
     setUniSet({ ...uniSet, [set]: uniCopy });
-    //if set is "appliedTo" then set formValues.universitiesAppliedTo to uniCopy else set formValues.universitiesAcceptedTo to uniCopy
 
     if (set === 'appliedTo') {
       setFormValues({
@@ -50,25 +50,23 @@ const Application = () => {
     }
   };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormValues({ ...formValues, [name]: value });
-  };
-
-  const handleUniChange = (e, index, set) => {
+  const handleUniChange = (e, id, set) => {
     const { name, value } = e.target;
     const uniCopy = [...uniSet[set]];
 
-    uniCopy.map((uni, i) => {
-      if (i === index) {
+    uniCopy.map((uni) => {
+      if (uni.id === id) {
+        //if univeristy id matches id of input, update the value
         uni[name] = value;
       } else {
+        // else return the university
         return uni;
       }
     });
 
+    // update the state with the new university list
     setUniSet({ ...uniSet, [set]: uniCopy });
-    // setFormValues({ ...formValues, universitiesAppliedTo: uniCopy });
+
     if (set === 'appliedTo') {
       setFormValues({
         ...formValues,
@@ -81,12 +79,6 @@ const Application = () => {
         universitiesAcceptedTo: uniCopy,
       });
     }
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(formValues);
-    handleFormReset();
   };
 
   const handleFormReset = () => {
@@ -95,9 +87,11 @@ const Application = () => {
       appliedTo: [{ ...uni, id: createUniqueId() }],
       acceptedTo: [{ ...uni, id: createUniqueId() }],
     });
-  };
 
-  console.log(uniSet);
+    //reset file input
+    const fileInput = document.getElementById('letter');
+    fileInput.value = null;
+  };
 
   return (
     <>
@@ -109,7 +103,9 @@ const Application = () => {
       />
       <Wrapper className="application__section">
         <div className="application__container">
-          <form className="application__form form" onSubmit={handleSubmit}>
+          <form
+            className="application__form form"
+            onSubmit={(e) => handleSubmit(e, handleFormReset)}>
             <div className="form__row">
               <FormInput
                 handleChange={handleChange}
@@ -126,134 +122,69 @@ const Application = () => {
                 validate={true}
               />
             </div>
+
+            <DegreeRadios
+              setFormValues={setFormValues}
+              formValues={formValues}
+            />
+
+            <UniversityList
+              handleUniChange={handleUniChange}
+              uniSet={uniSet}
+              addUni={addUni}
+              removeUni={removeUni}
+              label="List universities you have applied to:"
+              set="appliedTo"
+            />
+
+            <UniversityList
+              handleUniChange={handleUniChange}
+              uniSet={uniSet}
+              addUni={addUni}
+              removeUni={removeUni}
+              label="List universities you have been accepted to, if any:"
+              set="acceptedTo"
+            />
+
             <div className="form__row">
-              <div className="form__control form__control_type_radios">
-                <label htmlFor="degree" className="form__label">
-                  Which level degree are you currently pursuing?
-                </label>
-                {/* radio buttons */}
-                <div className="form__radios">
-                  <div className="form__radio">
-                    <input
-                      type="radio"
-                      name="degree"
-                      id="degree"
-                      onChange={() =>
-                        setFormValues({ ...formValues, degree: "Master's" })
-                      }
-                      checked={formValues.degree === "Master's"}
-                    />
-                    <label htmlFor="degree">Masters</label>
-                  </div>
-                  <div className="form__radio">
-                    <input
-                      type="radio"
-                      name="degree"
-                      id="degree"
-                      onChange={() =>
-                        setFormValues({ ...formValues, degree: 'Doctorate' })
-                      }
-                      checked={formValues.degree === 'Doctorate'}
-                    />
-                    <label htmlFor="degree">Doctorate</label>
-                  </div>
-                </div>
-                <span className="form__error">Error message</span>
-              </div>
+              <FileUpload handleFileUpload={handleFileUpload} />
             </div>
 
-            <label className="form__label form__label_university">
-              List universities you have applied to:
-            </label>
-
-            {uniSet.appliedTo?.map((uni, index) => {
-              return (
-                <div key={index}>
-                  <div className="form__row">
-                    <FormInput
-                      handleChange={(e) =>
-                        handleUniChange(e, index, 'appliedTo')
-                      }
-                      id="university"
-                      validate={false}
-                      value={uni.university}
-                      label={index === 0 ? 'University' : ''}
-                    />
-                    <FormInput
-                      handleChange={(e) =>
-                        handleUniChange(e, index, 'appliedTo')
-                      }
-                      id="universityLocation"
-                      label={index === 0 ? 'Location' : ''}
-                      value={uni.universityLocation}
-                      validate={false}
-                    />
-                    <UniButtons>
-                      <UniButton
-                        type="button"
-                        onClick={() => addUni('appliedTo')}>
-                        Add
-                      </UniButton>
-                      <UniButton
-                        type="button"
-                        onClick={() => {
-                          removeUni(index, 'appliedTo');
-                        }}>
-                        Delete
-                      </UniButton>
-                    </UniButtons>
-                  </div>
-                </div>
-              );
-            })}
-
-            <label className="form__label form__label_university">
-              List universities you have been accepted to, if any:
-            </label>
-
-            {uniSet.acceptedTo?.map((uni, index) => {
-              return (
-                <div key={index}>
-                  <div className="form__row">
-                    <FormInput
-                      handleChange={(e) =>
-                        handleUniChange(e, index, 'acceptedTo')
-                      }
-                      id="university"
-                      validate={false}
-                      value={uni.university}
-                      label={index === 0 ? 'University' : ''}
-                    />
-                    <FormInput
-                      handleChange={(e) =>
-                        handleUniChange(e, index, 'acceptedTo')
-                      }
-                      id="universityLocation"
-                      label={index === 0 ? 'Location' : ''}
-                      value={uni.universityLocation}
-                      validate={false}
-                    />
-                    <UniButtons>
-                      <UniButton
-                        type="button"
-                        onClick={() => addUni('acceptedTo')}>
-                        Add
-                      </UniButton>
-                      <UniButton
-                        type="button"
-                        onClick={() => {
-                          removeUni(index, 'acceptedTo');
-                        }}>
-                        Delete
-                      </UniButton>
-                    </UniButtons>
-                  </div>
-                </div>
-              );
-            })}
+            <hr />
+            <HeaderTwo className="form__header" text="Create your account:" />
 
             <div className="form__row">
-              <SubmitButton type="submit">Submit</SubmitButton>
+              <FormInput
+                handleChange={handleChange}
+                id="email"
+                value={formValues.email || ''}
+                label="Email"
+                validate={true}
+              />
+              <FormInput
+                handleChange={handleChange}
+                id="phone"
+                value={formValues.phone || ''}
+                label="Phone"
+                validate={true}
+              />
+            </div>
+
+            <div className="form__row">
+              <FormInput
+                handleChange={handleChange}
+                id="password"
+                value={formValues.password || ''}
+                label="Password"
+                validate={true}
+                type="password"
+              />
+            </div>
+
+            <div className="form__row">
+              <PrimaryButton buttonText="Submit" type="submit">
+                Submit
+              </PrimaryButton>
             </div>
           </form>
         </div>
@@ -275,60 +206,4 @@ const Wrapper = styled.section`
     border-radius: 0.5rem;
     box-shadow: 0px 0px 70px -12px rgb(35 35 35 / 19%);
   }
-
-  .form {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-  }
-
-  .form__row {
-    display: flex;
-    gap: 2rem;
-    justify-content: space-between;
-    width: 100%;
-    align-items: flex-end;
-  }
-
-  .form__control {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    width: 100%;
-    max-width: 300px;
-  }
-
-  .form__label_university {
-    font-weight: bold;
-  }
-
-  .form__control_type_radios {
-    max-width: none;
-  }
-`;
-
-const UniButtons = styled.div`
-  display: flex;
-  gap: 0.5rem;
-`;
-
-const UniButton = styled.button`
-  background-color: ${primaryColor};
-  color: ${whiteColor};
-  border: none;
-  border-radius: 0.5rem;
-  padding: 0.5rem 0.7rem;
-  cursor: pointer;
-  max-height: 40px;
-  font-size: 0.6rem;
-`;
-
-const SubmitButton = styled.button`
-  background-color: ${secondaryColor};
-  color: ${whiteColor};
-  border: none;
-  border-radius: 0.5rem;
-  padding: 0.5rem 0.7rem;
-  cursor: pointer;
 `;

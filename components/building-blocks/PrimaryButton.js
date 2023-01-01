@@ -1,8 +1,12 @@
 import styled from 'styled-components';
 import { primaryColor, whiteColor } from '../../utils/style-variables';
 
-export default function PrimaryButton({ className, buttonText }) {
-  return <PrimaryBtn className={className}>{buttonText}</PrimaryBtn>;
+export default function PrimaryButton({ className, buttonText, type }) {
+  return (
+    <PrimaryBtn className={className} type={type || 'button'}>
+      {buttonText}
+    </PrimaryBtn>
+  );
 }
 
 const PrimaryBtn = styled.button`
