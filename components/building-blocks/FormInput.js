@@ -38,18 +38,4 @@ const FormControl = styled.div`
   @media (max-width: 650px) {
     max-width: none;
   }
-
-  .form__input {
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    width: 100%;
-    padding: 0.3rem 0.5rem;
-  }
-
-  .form__error {
-    position: absolute;
-    bottom: -1.5rem;
-    font-size: 0.8rem;
-    left: 0;
-    color: red;
-  }
 `;

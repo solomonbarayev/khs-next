@@ -18,7 +18,7 @@ const Application = () => {
     setFormValues,
     handleChange,
     handleFileUpload,
-    handleSubmit,
+    handleApplicationSubmit,
   } = useForm();
   const [uniSet, setUniSet] = useState({
     appliedTo: [{ ...uni, id: createUniqueId() }],
@@ -105,7 +105,7 @@ const Application = () => {
         <div className="application__container">
           <form
             className="application__form form"
-            onSubmit={(e) => handleSubmit(e, handleFormReset)}>
+            onSubmit={(e) => handleApplicationSubmit(e, handleFormReset)}>
             <div className="form__row">
               <FormInput
                 handleChange={handleChange}

@@ -9,6 +9,7 @@ export default function FileUpload({ handleFileUpload }) {
       </label>
       <input
         type="file"
+        accept=".jpg, .jpeg, .png, .pdf, .doc, .docx, .txt"
         name="letter"
         id="letter"
         onChange={handleFileUpload}
