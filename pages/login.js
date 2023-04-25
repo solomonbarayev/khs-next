@@ -4,12 +4,17 @@ import SidepageHero from '../components/building-blocks/SidepageHero';
 import bgImage from '../public/get-involved-hero-bg.jpg';
 import FormInput from '../components/building-blocks/FormInput';
 import PrimaryButton from '../components/building-blocks/PrimaryButton';
-
 import useForm from '../hooks/useForm';
-import HeaderTwo from '../components/building-blocks/HeaderTwo';
 
 const Login = () => {
   const { formValues, setFormValues, handleChange } = useForm();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(formValues);
+    console.log('form submitted. add strapi api call here');
+    setFormValues({});
+  };
 
   return (
     <Content>
@@ -24,19 +29,19 @@ const Login = () => {
             Please login to access your application. (Accounts are created when
             an application is submitted.)
           </p>
-          <form
-            className="form"
-            onSubmit={(e) => console.log('form submitted')}>
+          <form className="form" onSubmit={handleSubmit}>
             <FormInput
               id="email"
               className="form__input"
               label="Email"
+              value={formValues.email || ''}
               type="email"
               placeholder="Enter your email"
               handleChange={handleChange}
             />
             <FormInput
               id="password"
+              value={formValues.password || ''}
               label="Password"
               className="form__input"
               type="password"

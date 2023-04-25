@@ -10,7 +10,7 @@ export default function FormInput({
   className,
 }) {
   return (
-    <FormControl>
+    <FormControl className="input">
       <label htmlFor={id} className="form__label">
         {label}
       </label>
@@ -34,6 +34,7 @@ const FormControl = styled.div`
   gap: 0.5rem;
   width: 100%;
   max-width: 300px;
+  box-sizing: border-box;
 
   @media (max-width: 650px) {
     max-width: none;
