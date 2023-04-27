@@ -5,9 +5,13 @@ import FormInput from '../components/building-blocks/FormInput';
 import PrimaryButton from '../components/building-blocks/PrimaryButton';
 import useForm from '../hooks/useForm';
 import { api } from '../utils/api';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
   const { formValues, setFormValues, handleChange } = useForm();
+
+  const notifyError = (message) => toast.error(message);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -15,12 +19,20 @@ const Login = () => {
       identifier: formValues.email,
       password: formValues.password,
     };
-    api.loginUser(user).then((data) => {
-      //if successful login clear form
-      if (data) {
-        setFormValues({}); //clear form
-      }
-    });
+    api
+      .loginUser(user)
+      .then((data) => {
+        //if successful login clear form
+        if (data.status === 200) {
+          setFormValues({}); //clear form
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        let message = err.response.data.error.message;
+        message = message.replace('identifier', 'email');
+        notifyError(message);
+      });
   };
 
   return (
@@ -64,6 +76,7 @@ const Login = () => {
           </form>
         </div>
       </Wrapper>
+      <ToastContainer />
     </Content>
   );
 };

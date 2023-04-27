@@ -13,17 +13,6 @@ class Api {
     return res.json();
   };
 
-  // postUser = (user) => {
-  //   return fetch(`${this.baseUrl}/api/auth/local/register`, {
-  //     method: 'POST',
-  //     headers: {
-  //       Accept: 'application/json',
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify(user),
-  //   }).then(this._getResponseData);
-  // };
-
   postUser = (user) => {
     return axios
       .post(`${this.baseUrl}/api/auth/local/register`, user)
@@ -33,25 +22,32 @@ class Api {
       });
   };
 
+  // loginUser = (user) => {
+  //   return fetch(`${this.baseUrl}/api/auth/local`, {
+  //     method: 'POST',
+  //     headers: {
+  //       Accept: 'application/json',
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify(user),
+  //   })
+  //     .then(this._getResponseData)
+  //     .then((data) => {
+  //       //save jwt to local storage
+  //       localStorage.setItem('jwt', data.jwt);
+  //       return data;
+  //     })
+  //     .catch((err) => {
+  //       console.log('there was an error logging in user');
+  //       console.log(err);
+  //     });
+  // };
+
   loginUser = (user) => {
-    return fetch(`${this.baseUrl}/api/auth/local`, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(user),
-    })
-      .then(this._getResponseData)
-      .then((data) => {
-        //save jwt to local storage
-        localStorage.setItem('jwt', data.jwt);
-        return data;
-      })
-      .catch((err) => {
-        console.log('there was an error logging in user');
-        console.log(err);
-      });
+    return axios.post(`${this.baseUrl}/api/auth/local`, user).then((res) => {
+      console.log(res);
+      return res;
+    });
   };
 
   postApplication = (application) => {
