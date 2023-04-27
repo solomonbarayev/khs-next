@@ -11,6 +11,9 @@ import PrimaryButton from '../components/building-blocks/PrimaryButton';
 import { createUniqueId } from '../utils/helpers';
 import { uni } from '../utils/constants';
 import useForm from '../hooks/useForm';
+//import toastify for notifications
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Application = () => {
   const {
@@ -93,6 +96,18 @@ const Application = () => {
     fileInput.value = null;
   };
 
+  //toastify notification
+  const notify = (success) => {
+    return success
+      ? toast.success('Application submitted successfully!')
+      : toast.error('Something went wrong. Please try again.');
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleApplicationSubmit(e, handleFormReset, notify);
+  };
+
   return (
     <>
       <SidepageHero
@@ -103,9 +118,7 @@ const Application = () => {
       />
       <Wrapper className="application__section">
         <div className="application__container">
-          <form
-            className="application__form form"
-            onSubmit={(e) => handleApplicationSubmit(e, handleFormReset)}>
+          <form className="application__form form" onSubmit={handleSubmit}>
             <div className="form__row">
               <FormInput
                 handleChange={handleChange}
@@ -189,6 +202,7 @@ const Application = () => {
           </form>
         </div>
       </Wrapper>
+      <ToastContainer />
     </>
   );
 };

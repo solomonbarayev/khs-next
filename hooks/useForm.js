@@ -10,7 +10,7 @@ export default function useForm() {
     setFormValues({ ...formValues, [name]: value });
   };
 
-  const handleApplicationSubmit = (e, handleFormReset) => {
+  const handleApplicationSubmit = (e, handleFormReset, notify) => {
     e.preventDefault();
 
     const user = {
@@ -42,13 +42,18 @@ export default function useForm() {
           .then((res) => {
             console.log(res);
             console.log('user created and application submitted');
+            handleFormReset();
+            notify(true);
           })
           .catch((err) => {
+            notify(false);
             console.log(err);
           });
+        return 200;
       })
       .catch((err) => {
         console.log(err);
+        notify(false);
         return 400;
       });
   };
