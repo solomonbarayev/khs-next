@@ -49,6 +49,7 @@ export default function useForm() {
       })
       .catch((err) => {
         console.log(err);
+        return 400;
       });
   };
 

@@ -1,19 +1,26 @@
 import React from 'react';
 import styled from 'styled-components';
 import SidepageHero from '../components/building-blocks/SidepageHero';
-import bgImage from '../public/get-involved-hero-bg.jpg';
 import FormInput from '../components/building-blocks/FormInput';
 import PrimaryButton from '../components/building-blocks/PrimaryButton';
 import useForm from '../hooks/useForm';
+import { api } from '../utils/api';
 
 const Login = () => {
   const { formValues, setFormValues, handleChange } = useForm();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formValues);
-    console.log('form submitted. add strapi api call here');
-    setFormValues({});
+    const user = {
+      identifier: formValues.email,
+      password: formValues.password,
+    };
+    api.loginUser(user).then((data) => {
+      //if successful login clear form
+      if (data) {
+        setFormValues({}); //clear form
+      }
+    });
   };
 
   return (
@@ -90,7 +97,6 @@ const Wrapper = styled.main`
   }
 
   .form {
-    /* max-width: 300px; */
     width: 100%;
   }
 

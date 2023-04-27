@@ -6,68 +6,92 @@ import PrimaryButton from '../components/building-blocks/PrimaryButton';
 import useForm from '../hooks/useForm';
 import HeaderTwo from '../components/building-blocks/HeaderTwo';
 import BodyText from '../components/building-blocks/BodyText';
+import { api } from '../utils/api';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Contact = () => {
   const { formValues, setFormValues, handleChange } = useForm();
 
+  const notify = () => toast.success('Message sent!');
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    setFormValues({});
-    console.log('form submitted. add strapi api call here');
+
+    const contactEntry = {
+      data: {
+        name: formValues.name,
+        email: formValues.email,
+        message: formValues.message,
+      },
+    };
+
+    api.postContactEntry(contactEntry).then((data) => {
+      //if successful login clear form
+      if (data != 400) {
+        setFormValues({}); //clear form
+        notify();
+      } else {
+        toast.error('Error sending message');
+      }
+    });
   };
 
   return (
-    <Content>
-      <SidepageHero title="Contact Us" />
-      <Wrapper>
-        <Left></Left>
-        <Right>
-          <div className="contact">
-            <div className="contact__container">
-              <HeaderTwo text="Let's talk" />
-              <BodyText text="We’d love to hear from you! Send us a message using the form below." />
-              <form className="contact_form" onSubmit={handleSubmit}>
-                <FormInput
-                  id="name"
-                  className="contact_form__input"
-                  label="Name"
-                  type="text"
-                  handleChange={handleChange}
-                  value={formValues.name || ''}
-                />
-                <FormInput
-                  id="email"
-                  className="contact_form__input"
-                  label="Email"
-                  type="email"
-                  handleChange={handleChange}
-                  value={formValues.email || ''}
-                />
-
-                <div>
-                  <label htmlFor="message" className="form__label">
-                    Message
-                  </label>
-                  <textarea
-                    value={formValues.message || ''}
-                    id="message"
-                    label="Message"
-                    type="textarea"
-                    name="message"
-                    onChange={handleChange}
-                    className="form__input contact_form__input_type_textarea"
+    <>
+      <Content>
+        <SidepageHero title="Contact Us" />
+        <Wrapper>
+          <Left></Left>
+          <Right>
+            <div className="contact">
+              <div className="contact__container">
+                <HeaderTwo text="Let's talk" />
+                <BodyText text="We’d love to hear from you! Send us a message using the form below." />
+                <form className="contact_form" onSubmit={handleSubmit}>
+                  <FormInput
+                    id="name"
+                    className="contact_form__input"
+                    label="Name"
+                    type="text"
+                    handleChange={handleChange}
+                    value={formValues.name || ''}
                   />
-                </div>
+                  <FormInput
+                    id="email"
+                    className="contact_form__input"
+                    label="Email"
+                    type="email"
+                    handleChange={handleChange}
+                    value={formValues.email || ''}
+                  />
 
-                <div className="form__row">
-                  <PrimaryButton buttonText="Submit" type="submit" />
-                </div>
-              </form>
+                  <div>
+                    <label htmlFor="message" className="form__label">
+                      Message
+                    </label>
+                    <textarea
+                      value={formValues.message || ''}
+                      id="message"
+                      label="Message"
+                      type="textarea"
+                      name="message"
+                      onChange={handleChange}
+                      className="form__input contact_form__input_type_textarea"
+                    />
+                  </div>
+
+                  <div className="form__row">
+                    <PrimaryButton buttonText="Submit" type="submit" />
+                  </div>
+                </form>
+              </div>
             </div>
-          </div>
-        </Right>
-      </Wrapper>
-    </Content>
+          </Right>
+        </Wrapper>
+      </Content>
+      <ToastContainer />
+    </>
   );
 };
 
