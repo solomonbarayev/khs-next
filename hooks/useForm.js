@@ -2,6 +2,9 @@
 import { api } from '../utils/api';
 import { useState } from 'react';
 
+//axios
+import axios from 'axios';
+
 export default function useForm() {
   const [formValues, setFormValues] = useState({});
 
@@ -21,14 +24,21 @@ export default function useForm() {
       lastName: formValues.lastName,
     };
 
+    let status;
+    let message;
+
     api
       .postUser(user)
-      .then((createdUser) => {
+      .then((res) => {
+        status = res.status;
+
+        let createdUser = res.data.user;
+
         const application = {
           degree: formValues.degree,
           universitiesAppliedTo: formValues.universitiesAppliedTo,
           universitiesAcceptedTo: formValues.universitiesAcceptedTo,
-          applicantId: createdUser.user.id,
+          applicantId: createdUser.id,
           firstName: formValues.firstName,
           lastName: formValues.lastName,
         };
@@ -43,18 +53,24 @@ export default function useForm() {
             console.log(res);
             console.log('user created and application submitted');
             handleFormReset();
-            notify(true);
+            // notify(true);
+            status = res.status;
+            message = 'Application submitted successfully!';
+            notify(status, message);
           })
           .catch((err) => {
-            notify(false);
+            status = err.response.data.error.status;
+            message = err.response.data.error.message;
+            notify(status, message);
             console.log(err);
           });
-        return 200;
       })
       .catch((err) => {
         console.log(err);
-        notify(false);
-        return 400;
+        status = err.response.data.error.status;
+        message = err.response.data.error.message;
+
+        notify(status, message);
       });
   };
 

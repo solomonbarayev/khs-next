@@ -1,4 +1,5 @@
 //api class
+import axios from 'axios';
 
 class Api {
   constructor(baseUrl) {
@@ -12,15 +13,24 @@ class Api {
     return res.json();
   };
 
+  // postUser = (user) => {
+  //   return fetch(`${this.baseUrl}/api/auth/local/register`, {
+  //     method: 'POST',
+  //     headers: {
+  //       Accept: 'application/json',
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify(user),
+  //   }).then(this._getResponseData);
+  // };
+
   postUser = (user) => {
-    return fetch(`${this.baseUrl}/api/auth/local/register`, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(user),
-    }).then(this._getResponseData);
+    return axios
+      .post(`${this.baseUrl}/api/auth/local/register`, user)
+      .then((res) => {
+        console.log(res);
+        return res;
+      });
   };
 
   loginUser = (user) => {
