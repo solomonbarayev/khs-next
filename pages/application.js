@@ -96,25 +96,7 @@ const Application = () => {
     fileInput.value = null;
   };
 
-  //toastify notification
   const notify = (status, message) => {
-    // return success
-    //   ? toast.success('Application submitted successfully!')
-    //   : toast.error('Something went wrong. Please try again.');
-    // if (status == 200) {
-    //   toast.success('Application submitted successfully!');
-    //   return;
-    // } else if (status == 500) {
-    //   toast.error('Something went wrong. Please try again.');
-    //   return;
-    // } else if (status == 400) {
-    //   toast.error('Email already registered. Please login.');
-    //   return;
-    // } else {
-    //   toast.error('Something went wrong. Please try again.');
-    //   return;
-    // }
-
     //for all good responses
     if (status >= 200 && status < 300) {
       toast.success(message);
