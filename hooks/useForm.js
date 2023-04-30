@@ -3,7 +3,6 @@ import { api } from '../utils/api';
 import { useState } from 'react';
 
 //axios
-import axios from 'axios';
 
 export default function useForm() {
   const [formValues, setFormValues] = useState({});
@@ -41,6 +40,8 @@ export default function useForm() {
           applicantId: createdUser.id,
           firstName: formValues.firstName,
           lastName: formValues.lastName,
+          email: formValues.email,
+          phone: formValues.phone,
         };
 
         let formData = new FormData();
@@ -53,7 +54,6 @@ export default function useForm() {
             console.log(res);
             console.log('user created and application submitted');
             handleFormReset();
-            // notify(true);
             status = res.status;
             message = 'Application submitted successfully!';
             notify(status, message);

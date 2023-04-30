@@ -21,10 +21,11 @@ const Login = () => {
     };
     api
       .loginUser(user)
-      .then((data) => {
+      .then((res) => {
         //if successful login clear form
-        if (data.status === 200) {
+        if (res.status === 200) {
           setFormValues({}); //clear form
+          localStorage.setItem('jwt', res.data.jwt);
         }
       })
       .catch((err) => {

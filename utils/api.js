@@ -22,27 +22,6 @@ class Api {
       });
   };
 
-  // loginUser = (user) => {
-  //   return fetch(`${this.baseUrl}/api/auth/local`, {
-  //     method: 'POST',
-  //     headers: {
-  //       Accept: 'application/json',
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify(user),
-  //   })
-  //     .then(this._getResponseData)
-  //     .then((data) => {
-  //       //save jwt to local storage
-  //       localStorage.setItem('jwt', data.jwt);
-  //       return data;
-  //     })
-  //     .catch((err) => {
-  //       console.log('there was an error logging in user');
-  //       console.log(err);
-  //     });
-  // };
-
   loginUser = (user) => {
     return axios.post(`${this.baseUrl}/api/auth/local`, user).then((res) => {
       console.log(res);
@@ -74,6 +53,14 @@ class Api {
         console.log(err);
         return 400;
       });
+  };
+
+  getApplications = (jwt) => {
+    return axios(`${this.baseUrl}/api/applications?populate=*`, {
+      headers: {
+        Authorization: `Bearer ${jwt}`,
+      },
+    });
   };
 }
 
