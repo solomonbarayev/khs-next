@@ -23,8 +23,11 @@ class Api {
   };
 
   loginUser = (user) => {
-    return axios.post(`${this.baseUrl}/api/auth/local`, user).then((res) => {
-      console.log(res);
+    // return axios.post(`${this.baseUrl}/api/auth/local`, user).then((res) => {
+    //   console.log(res);
+    //   return res;
+    // });
+    return axios.post(`http://localhost:3000/api/login`, user).then((res) => {
       return res;
     });
   };

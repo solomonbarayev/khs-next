@@ -1,159 +1,178 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
+import { useAuth } from '../contexts/AuthContext';
+import Link from 'next/link';
+
 import SidepageHero from '../components/building-blocks/SidepageHero';
 import styled from 'styled-components';
 import { api } from '../utils/api';
 import { useRouter } from 'next/router';
-import { useTable } from 'react-table';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import axios from 'axios';
 
-const COLUMNS = [
-  {
-    Header: 'Table',
-    columns: [
-      {
-        Header: 'First Name',
-        accessor: 'firstName',
-      },
-      {
-        Header: 'Last Name',
-        accessor: 'lastName',
-      },
-      {
-        Header: 'Email',
-        accessor: 'email',
-      },
-      {
-        Header: 'Phone',
-        accessor: 'phone',
-      },
-      {
-        Header: 'AppliedTo',
-        accessor: 'universitiesAppliedTo',
-      },
-      {
-        Header: 'Accepted',
-        accessor: 'universitiesAcceptedTo',
-      },
-    ],
-  },
+const headers = [
+  'Name',
+  'Email',
+  'Phone',
+  'Applied To',
+  'Accepted To',
+  'Letter',
 ];
 
-const Admin = () => {
-  const [jwt, setJwt] = useState(null);
+const Admin2 = () => {
+  const { user } = useAuth();
+
   const [applicants, setApplicants] = useState([]);
-  const [mounted, setMounted] = useState(false);
+
+  const APPLICANTS = useMemo;
 
   const router = useRouter();
 
-  const columns = useMemo(() => COLUMNS, []);
+  async function awaitUser() {
+    if (user) {
+      axios
+        .get('http://localhost:3000/api/applicants')
+        .then((res) => {
+          const { data } = res.data.applicants;
 
-  const tableInstance = useTable({
-    columns,
-    data: applicants,
-  });
+          console.log(data);
+
+          data.forEach((applicant) => {
+            const {
+              universitiesAppliedTo,
+              universitiesAcceptedTo,
+              letter,
+              ...rest
+            } = applicant.attributes;
+
+            const unisAppliedString = universitiesAppliedTo
+              .map((uni) => uni.university)
+              .join(', ');
+
+            const unisAcceptedString = universitiesAcceptedTo
+              .map((uni) => uni.university)
+              .join(', ');
+
+            setApplicants((prev) => [
+              ...prev,
+              {
+                ...rest,
+                universitiesAppliedTo: unisAppliedString,
+                universitiesAcceptedTo: unisAcceptedString,
+                letter: letter.data.attributes.url,
+              },
+            ]);
+          });
+        })
+        .catch((err) => console.log(err));
+    }
+  }
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      setJwt(localStorage.getItem('jwt'));
+      awaitUser();
     }
-  }, []);
-
-  useEffect(() => {
-    if (jwt && mounted) {
-      api.getApplications(jwt).then((res) => {
-        const { data } = res.data;
-        data.forEach((applicant, i) => {
-          // setApplicants((prev) => [...prev, applicant.attributes]);
-          //add applicant.attributes to applicants array except conver subarray universitiesAppliedTo to comma separated string
-          const { universitiesAppliedTo, universitiesAcceptedTo, ...rest } =
-            applicant.attributes;
-
-          const unisAppliedString = universitiesAppliedTo
-            .map((uni) => uni.university)
-            .join(', ');
-
-          const unisAcceptedString = universitiesAcceptedTo
-            .map((uni) => uni.university)
-            .join(', ');
-
-          setApplicants((prev) => [
-            ...prev,
-            {
-              ...rest,
-              universitiesAppliedTo: unisAppliedString,
-              universitiesAcceptedTo: unisAcceptedString,
-            },
-          ]);
-        });
-      });
-    } else if (!jwt && mounted) {
-      router.push('/login');
-    } else if (!mounted) {
-      setMounted(true);
-      return;
-    } else if (jwt === null) {
-      router.push('/login');
-    }
-  }, [jwt, mounted]);
-
-  console.log(applicants);
-
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    tableInstance;
+  }, [user]);
 
   return (
-    <>
+    <Container>
       <SidepageHero title="Admin Dashboard" />
       <Wrapper>
-        {jwt && mounted && (
-          <table {...getTableProps()}>
-            <thead>
-              {headerGroups.map((headerGroup, i) => (
-                <tr key={i} {...headerGroup.getHeaderGroupProps()}>
-                  {headerGroup.headers.map((column, k) => (
-                    <th
-                      key={k}
-                      {...column.getHeaderProps()}
-                      style={{
-                        borderBottom: 'solid 3px red',
-                        background: 'aliceblue',
-                        color: 'black',
-                        fontWeight: 'bold',
-                      }}>
-                      {column.render('Header')}
-                    </th>
+        {user ? (
+          <TableContainer>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  {headers.map((h, i) => (
+                    <TableCell key={i}>{h}</TableCell>
                   ))}
-                </tr>
-              ))}
-            </thead>
-            <tbody {...getTableBodyProps()}>
-              {rows.map((row, i) => {
-                prepareRow(row);
-                return (
-                  <tr key={i} {...row.getRowProps()}>
-                    {row.cells.map((cell, k) => {
-                      return (
-                        <td
-                          key={k}
-                          {...cell.getCellProps()}
-                          style={{
-                            padding: '10px',
-                            border: 'solid 1px gray',
-                          }}>
-                          {cell.value}
-                        </td>
-                      );
-                    })}
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {applicants.map((applicant) => (
+                  <TableRow key={applicant.applicantI}>
+                    <TableCell>
+                      {applicant.firstName + ' ' + applicant.lastName}
+                    </TableCell>
+                    <TableCell>
+                      <a href={'mailto:' + applicant.email}>
+                        {applicant.email}
+                      </a>
+                    </TableCell>
+                    <TableCell>
+                      <a href={'tel:' + applicant.phone}>+1{applicant.phone}</a>
+                    </TableCell>
+                    <TableCell className="mx-200">
+                      {applicant.universitiesAppliedTo}
+                    </TableCell>
+                    <TableCell className="mx-200">
+                      {applicant.universitiesAcceptedTo}
+                    </TableCell>
+                    <TableCell>
+                      <button>
+                        <a
+                          href={applicant.letter}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="letter__link">
+                          view&nbsp;document
+                        </a>
+                      </button>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        ) : (
+          <Unauthed>
+            <h2>Not Logged In</h2>
+            <Link href="/login">Log in</Link>
+          </Unauthed>
         )}
       </Wrapper>
-    </>
+    </Container>
   );
 };
 
-export default Admin;
+export default Admin2;
 
-const Wrapper = styled.div``;
+const Unauthed = styled.div`
+  margin: 100px auto 0;
+  padding: 75px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+`;
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 92vh;
+`;
+
+const Wrapper = styled.div`
+  flex-grow: 1;
+
+  .letter__link {
+    padding: 5px 10px;
+    background-color: #51b7bc;
+    border-radius: 50px;
+    color: #0c1670;
+    cursor: pointer;
+    transition: all ease-in 0.3s;
+  }
+
+  .letter__link:hover {
+    opacity: 0.8;
+  }
+
+  .mx-200 {
+    max-width: 200px;
+  }
+`;

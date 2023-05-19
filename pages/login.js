@@ -22,15 +22,15 @@ const Login = () => {
     api
       .loginUser(user)
       .then((res) => {
+        console.log(res);
         //if successful login clear form
         if (res.status === 200) {
           setFormValues({}); //clear form
-          localStorage.setItem('jwt', res.data.jwt);
         }
       })
       .catch((err) => {
         console.log(err);
-        let message = err.response.data.error.message;
+        let message = err.response.data.message;
         message = message.replace('identifier', 'email');
         notifyError(message);
       });
