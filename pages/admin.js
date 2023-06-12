@@ -28,7 +28,7 @@ const Admin2 = () => {
 
   const [applicants, setApplicants] = useState([]);
 
-  const APPLICANTS = useMemo;
+  // const APPLICANTS = useMemo();
 
   const router = useRouter();
 
@@ -57,15 +57,34 @@ const Admin2 = () => {
               .map((uni) => uni.university)
               .join(', ');
 
-            setApplicants((prev) => [
-              ...prev,
-              {
-                ...rest,
-                universitiesAppliedTo: unisAppliedString,
-                universitiesAcceptedTo: unisAcceptedString,
-                letter: letter.data.attributes.url,
-              },
-            ]);
+            setApplicants((prev) => {
+              //first check if the applicant is already in the array
+              //if they are, then update their info
+              //if not, then add them to the array
+              const index = prev.findIndex(
+                (applicant) => applicant.email === rest.email
+              );
+
+              if (index !== -1) {
+                prev[index] = {
+                  ...prev[index],
+                  universitiesAppliedTo: unisAppliedString,
+                  universitiesAcceptedTo: unisAcceptedString,
+                  letter: letter.data.attributes.url,
+                };
+                return prev;
+              } else {
+                return [
+                  ...prev,
+                  {
+                    ...rest,
+                    universitiesAppliedTo: unisAppliedString,
+                    universitiesAcceptedTo: unisAcceptedString,
+                    letter: letter.data.attributes.url,
+                  },
+                ];
+              }
+            });
           });
         })
         .catch((err) => console.log(err));
