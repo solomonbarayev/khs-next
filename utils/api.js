@@ -23,10 +23,6 @@ class Api {
   };
 
   loginUser = (user) => {
-    // return axios.post(`${this.baseUrl}/api/auth/local`, user).then((res) => {
-    //   console.log(res);
-    //   return res;
-    // });
     return axios.post(`http://localhost:3000/api/login`, user).then((res) => {
       return res;
     });
@@ -67,6 +63,6 @@ class Api {
   };
 }
 
-const BASE_URL = 'http://localhost:1337';
+const BASE_URL = 'https://khs-strapi-deploy.onrender.com';
 
 export const api = new Api(BASE_URL);
