@@ -2,6 +2,7 @@ import '../styles/globals.css';
 import Layout from '../components/Layout';
 import { createGlobalStyle } from 'styled-components';
 import { AuthProvider } from '../contexts/AuthContext';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -24,11 +25,14 @@ const GlobalStyle = createGlobalStyle`
 
 export default function App({ Component, pageProps }) {
   return (
-    <AuthProvider>
-      <GlobalStyle />
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
-    </AuthProvider>
+    <>
+      <AuthProvider>
+        <GlobalStyle />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </AuthProvider>
+      <SpeedInsights />
+    </>
   );
 }
