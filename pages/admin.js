@@ -14,6 +14,8 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import axios from 'axios';
 
+const API_URL = process.env.API_URL;
+
 const headers = [
   'Name',
   'Email',
@@ -35,7 +37,7 @@ const Admin2 = () => {
   async function awaitUser() {
     if (user) {
       axios
-        .get('http://localhost:3000/api/applicants')
+        .get(`${API_URL}/applicants`)
         .then((res) => {
           const { data } = res.data.applicants;
 

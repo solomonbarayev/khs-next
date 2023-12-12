@@ -1,6 +1,7 @@
 //api class
 import axios from 'axios';
-
+//import env variable API_URL
+const API_URL = process.env.API_URL;
 class Api {
   constructor(baseUrl) {
     this.baseUrl = baseUrl;
@@ -23,7 +24,7 @@ class Api {
   };
 
   loginUser = (user) => {
-    return axios.post(`http://localhost:3000/api/login`, user).then((res) => {
+    return axios.post(`${API_URL}/login`, user).then((res) => {
       return res;
     });
   };

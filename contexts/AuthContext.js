@@ -12,7 +12,7 @@ export const AuthProvider = ({ children }) => {
     if (typeof window !== 'undefined') {
       //make api for current user
       axios
-        .get(`http://localhost:3000/api/user`)
+        .get(`${API_URL}/user`)
         .then((res) => {
           if (res.status === 200) {
             setUser(res.data.user);
