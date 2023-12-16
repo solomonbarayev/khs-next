@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { createContext, useContext, useState, useEffect } from 'react';
 
-const API_URL = process.env.API_URL;
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export const AuthContext = createContext();
 
