@@ -2,9 +2,11 @@
 import axios from 'axios';
 //import env variable API_URL
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
+const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL;
 class Api {
-  constructor(baseUrl) {
-    this.baseUrl = baseUrl;
+  constructor(strapiUrl = STRAPI_URL, apiUrl = API_URL) {
+    this.strapiUrl = strapiUrl;
+    this.apiUrl = apiUrl;
   }
 
   _getResponseData = (res) => {
@@ -16,7 +18,7 @@ class Api {
 
   postUser = (user) => {
     return axios
-      .post(`${this.baseUrl}/api/auth/local/register`, user)
+      .post(`${this.strapiUrl}/api/auth/local/register`, user)
       .then((res) => {
         console.log(res);
         return res;
@@ -24,13 +26,25 @@ class Api {
   };
 
   loginUser = (user) => {
-    return axios.post(`${API_URL}/login`, user).then((res) => {
+    return axios
+      .post(`${this.apiUrl}/login`, user)
+      .then((res) => {
+        return res;
+      })
+      .catch((err) => {
+        console.log(err);
+        return err;
+      });
+  };
+
+  getUserInfo = () => {
+    return axios.get(`${this.apiUrl}/user/`).then((res) => {
       return res;
     });
   };
 
   postApplication = (application) => {
-    return fetch(`${this.baseUrl}/api/applications`, {
+    return fetch(`${this.strapiUrl}/api/applications`, {
       method: 'POST',
       body: application,
       //no need for headers because we are sending a form data object
@@ -38,7 +52,7 @@ class Api {
   };
 
   postContactEntry = (contactEntry) => {
-    return fetch(`${this.baseUrl}/api/contacts`, {
+    return fetch(`${this.strapiUrl}/api/contacts`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -56,7 +70,7 @@ class Api {
   };
 
   getApplications = (jwt) => {
-    return axios(`${this.baseUrl}/api/applications?populate=*`, {
+    return axios(`${this.strapiUrl}/api/applications?populate=*`, {
       headers: {
         Authorization: `Bearer ${jwt}`,
       },
@@ -64,6 +78,6 @@ class Api {
   };
 }
 
-const BASE_URL = 'https://khs-strapi-deploy.onrender.com';
+// const BASE_URL = 'https://khs-strapi-deploy.onrender.com';
 
-export const api = new Api(BASE_URL);
+export const api = new Api();

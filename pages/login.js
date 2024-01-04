@@ -7,9 +7,12 @@ import useForm from '../hooks/useForm';
 import { api } from '../utils/api';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useRouter } from 'next/navigation';
 
 const Login = () => {
   const { formValues, setFormValues, handleChange } = useForm();
+
+  const router = useRouter();
 
   const notifyError = (message) => toast.error(message);
 
@@ -26,6 +29,7 @@ const Login = () => {
         //if successful login clear form
         if (res.status === 200) {
           setFormValues({}); //clear form
+          checkUser();
         }
       })
       .catch((err) => {
@@ -35,6 +39,19 @@ const Login = () => {
         notifyError(message);
       });
   };
+
+  async function checkUser() {
+    try {
+      const res = await api.getUserInfo();
+      console.log('res', res);
+      if (res.data.user.role.name == 'Admin') {
+        router.push('/admin');
+      }
+    } catch (err) {
+      console.log(err);
+      console.log('fell in checkUser');
+    }
+  }
 
   return (
     <Content>

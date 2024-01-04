@@ -19,6 +19,7 @@ export const AuthProvider = ({ children }) => {
           }
         })
         .catch((err) => {
+          console.log('in herrreeeee');
           console.log(err);
         });
     }
