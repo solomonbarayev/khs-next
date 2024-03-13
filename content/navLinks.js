@@ -31,9 +31,24 @@ const navLinks = [
     id: 6,
   },
   {
+    text: 'Dashboard',
+    link: '/admin',
+    id: 7,
+  },
+  {
+    text: 'My Application',
+    link: '/applicant',
+    id: 8,
+  },
+  {
     text: 'Contact Us',
     link: '/contact',
-    id: 7,
+    id: 9,
+  },
+  {
+    text: 'Logout',
+    link: '/logout',
+    id: 10,
   },
 ];
 

@@ -8,8 +8,10 @@ import {
 import Image from 'next/image';
 import Link from 'next/link';
 import logo from '../public/Logo-Vertical-Color.png';
+import { useAuth } from '../contexts/AuthContext';
 
 const Navigation = ({ type, setIsOpen }) => {
+  const { user } = useAuth();
   return (
     <Nav className="nav" type={type}>
       <div className="nav__logo">
@@ -19,19 +21,27 @@ const Navigation = ({ type, setIsOpen }) => {
       <ul className="nav__menu">
         {navLinks.map((linkItem) => {
           const { id, text, link } = linkItem;
-          return (
-            <li key={id} className="nav__menu-item">
-              <Link
-                href={link}
-                className="nav__menu-link"
-                activeclassname="nav__menu-link_active"
-                onClick={() => {
-                  if (type === 'mobile') setIsOpen(false);
-                }}>
-                {text}
-              </Link>
-            </li>
-          );
+          if (text === 'Login' && user != null) {
+          } else if (text === 'Dashboard' && user == null) {
+          } else if (text === 'Logout' && user == null) {
+          }
+          //if user is not logged in, don't show the My Application link
+          else if (text === 'My Application' && user == null) {
+          } else {
+            return (
+              <li key={id} className="nav__menu-item">
+                <Link
+                  href={link}
+                  className="nav__menu-link"
+                  activeclassname="nav__menu-link_active"
+                  onClick={() => {
+                    if (type === 'mobile') setIsOpen(false);
+                  }}>
+                  {text}
+                </Link>
+              </li>
+            );
+          }
         })}
       </ul>
       <div className="nav__btn-container">

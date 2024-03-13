@@ -39,13 +39,14 @@ const Login = () => {
         notifyError(message);
       });
   };
-
   async function checkUser() {
     try {
       const res = await api.getUserInfo();
       console.log('res', res);
       if (res.data.user.role.name == 'Admin') {
         router.push('/admin');
+      } else {
+        router.push('/applicant');
       }
     } catch (err) {
       console.log(err);

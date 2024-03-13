@@ -19,7 +19,6 @@ export const AuthProvider = ({ children }) => {
           }
         })
         .catch((err) => {
-          console.log('in herrreeeee');
           console.log(err);
         });
     }
@@ -32,4 +31,6 @@ export const AuthProvider = ({ children }) => {
   );
 };
 
-export const useAuth = () => useContext(AuthContext);
+const useAuth = () => useContext(AuthContext);
+
+export { useAuth };

@@ -69,11 +69,15 @@ class Api {
       });
   };
 
-  getApplications = (jwt) => {
-    return axios(`${this.strapiUrl}/api/applications?populate=*`, {
+  getApplication = () => {
+    const id = 2;
+    return axios.get(`${this.apiUrl}/applications`, {
+      method: 'GET',
       headers: {
-        Authorization: `Bearer ${jwt}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
       },
+      body: JSON.stringify({ id }),
     });
   };
 }
