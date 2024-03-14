@@ -31,6 +31,7 @@ const Applicant = () => {
       <SidepageHero title="Application" />
 
       <Wrapper>
+        {/* userinfo */}
         <UserInfo>
           <h2>Username: {user.username}</h2>
           <p>Email: {user.email}</p>
