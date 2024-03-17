@@ -32,11 +32,13 @@ const Applicant = () => {
 
       <Wrapper>
         {/* userinfo */}
-        <UserInfo>
-          <h2>Username: {user.username}</h2>
-          <p>Email: {user.email}</p>
-          <p>Member since: {user.createdAt.split('T')[0]}</p>
-        </UserInfo>
+        {user && (
+          <UserInfo>
+            <h2>Username: {user.username}</h2>
+            <p>Email: {user.email}</p>
+            <p>Member since: {user.createdAt.split('T')[0]}</p>
+          </UserInfo>
+        )}
       </Wrapper>
     </Container>
   );
