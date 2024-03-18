@@ -3,6 +3,14 @@ import { useAuth } from '../contexts/AuthContext';
 import styled from 'styled-components';
 import SidepageHero from '../components/building-blocks/SidepageHero';
 import { api } from '../utils/api';
+import {
+  Box,
+  Container,
+  Divider,
+  Paper,
+  Stack,
+  Typography,
+} from '@mui/material';
 
 const Applicant = () => {
   const { user } = useAuth();
@@ -27,30 +35,52 @@ const Applicant = () => {
   }, [user]);
 
   return (
-    <Container>
+    <Box sx={{ display: 'flex', flexDirection: 'column' }}>
       <SidepageHero title="Application" />
 
-      <Wrapper>
-        {/* userinfo */}
+      <Container maxWidth={'md'} sx={{ flexGrow: 1, padding: 5 }}>
         {user && (
-          <UserInfo>
-            <h2>Username: {user.username}</h2>
-            <p>Email: {user.email}</p>
-            <p>Member since: {user.createdAt.split('T')[0]}</p>
-          </UserInfo>
+          <Paper elevation={4} sx={{ padding: 3 }}>
+            <Stack spacing={2}>
+              <Typography variant="h6">User Info</Typography>
+              <Divider />
+              <Stack
+                spacing={1}
+                direction={'row'}
+                justifyContent={'space-between'}>
+                <Typography variant="p">
+                  <Typography fontWeight={'bold'} variant="span">
+                    Username:
+                  </Typography>{' '}
+                  {user.username}
+                </Typography>
+                <Typography variant="p">
+                  <Typography fontWeight={'bold'} variant="span">
+                    Email:
+                  </Typography>{' '}
+                  {user.email}
+                </Typography>
+                <Typography variant="p">
+                  <Typography fontWeight={'bold'} variant="span">
+                    Member since:
+                  </Typography>{' '}
+                  {user.createdAt.split('T')[0]}
+                </Typography>
+              </Stack>
+            </Stack>
+          </Paper>
         )}
-      </Wrapper>
-    </Container>
+      </Container>
+    </Box>
   );
 };
 
 export default Applicant;
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
 const Wrapper = styled.div``;
 
 const UserInfo = styled.div``;
+
+const boldSpan = styled.span`
+  font-weight: bold;
+`;

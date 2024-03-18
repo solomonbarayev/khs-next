@@ -9,9 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@emotion/react": "^11.10.8",
-    "@emotion/styled": "^11.10.8",
-    "@mui/material": "^5.12.3",
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.15.13",
     "@next/font": "13.0.7",
     "@vercel/speed-insights": "^1.0.1",
     "axios": "^1.2.2",
