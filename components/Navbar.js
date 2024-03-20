@@ -24,9 +24,7 @@ const Navigation = ({ type, setIsOpen }) => {
           if (text === 'Login' && user != null) {
           } else if (text === 'Dashboard' && user == null) {
           } else if (text === 'Logout' && user == null) {
-          }
-          //if user is not logged in, don't show the My Application link
-          else if (text === 'My Application' && user == null) {
+          } else if (text === 'My Application' && user == null) {
           } else {
             return (
               <li key={id} className="nav__menu-item">

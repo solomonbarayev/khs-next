@@ -69,15 +69,14 @@ class Api {
       });
   };
 
-  getApplication = () => {
-    const id = 2;
-    return axios.get(`${this.apiUrl}/applications`, {
-      method: 'GET',
+  getApplication = (username) => {
+    return axios.post(`${this.apiUrl}/application`, {
+      method: 'POST',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ id }),
+      body: JSON.stringify({ username }),
     });
   };
 }
