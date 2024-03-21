@@ -107,7 +107,7 @@ const Applicant = () => {
                     <Divider />
                     <Typography variant="p">
                       <Typography fontWeight={'bold'} variant="span">
-                        Universities Applied To:
+                        Applied To:
                       </Typography>{' '}
                       {app?.universitiesAppliedTo
                         .map((uni) => uni.university)
@@ -119,7 +119,7 @@ const Applicant = () => {
                     <Divider />
                     <Typography variant="p">
                       <Typography fontWeight={'bold'} variant="span">
-                        Universities Accepted To:
+                        Accepted To:
                       </Typography>{' '}
                       {app?.universitiesAcceptedTo
                         .map((uni) => uni.university)
